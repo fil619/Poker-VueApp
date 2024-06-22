@@ -8,6 +8,7 @@ const { gameName, userList, positionUser, positioning , revealScore, currentScor
 import { useSocket } from '../composables/useSocket';
 
 useSocket('joined', (users) => {
+  console.log(users);
   positioning.value = [[],[],[]]
   userList.value = []
   addUsers(users)
@@ -37,8 +38,8 @@ useSocket('userAction', (action) => {
 });
 
 function addUsers(users){
-  Object.entries(users).forEach(([key, value]) => {
-    const user = { id: key, username: value, score: 0 }
+  users.forEach((user) => {
+    console.log(user);
     userList.value.push(user)
     positionUser(user);
 });
