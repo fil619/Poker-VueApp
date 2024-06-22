@@ -1,7 +1,23 @@
 <script lang="ts" setup>
+import { computed } from "vue";
 import { useGameData } from "../composables/gameData";
+import { useSocket } from '../composables/useSocket';
 import FlipCard from "./FlipCard.vue";
-const { positioning, revealScore } = useGameData();
+const { positioning, revealScore, gameName } = useGameData();
+const { emitEvent } = useSocket();
+
+function revealScoreFunction(){
+  if (!revealScore.value) {
+    emitEvent('action', {room: gameName.value , action:'revealScore'});
+  } else {
+    emitEvent('action', {room: gameName.value , action:'newGame'});
+  }
+  revealScore.value = !revealScore.value
+}
+
+const buttonText =computed(()=>{
+  return revealScore.value ? "New Game" : "Reveal Score"
+})
 </script>
 
 <template>
@@ -28,10 +44,10 @@ const { positioning, revealScore } = useGameData();
           class="bg-sky-300 w-48 h-24 rounded-md flex justify-center items-center"
         >
           <button
-            @click="revealScore = !revealScore"
+            @click="revealScoreFunction"
             class="middle none center rounded-lg bg-gradient-to-tr from-pink-600 to-pink-400 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           >
-            Reveal Cards
+            {{ buttonText }}
           </button>
         </div>
       </div>
