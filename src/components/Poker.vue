@@ -3,7 +3,7 @@ import Game from "./Game.vue";
 import Score from "./Score.vue";
 
 import { useGameData } from "../composables/gameData";
-const { gameName, userList, positionUser, positioning , revealScore } = useGameData();
+const { gameName, userList, positionUser, positioning , revealScore, currentScore } = useGameData();
 
 import { useSocket } from '../composables/useSocket';
 
@@ -29,6 +29,7 @@ useSocket('userAction', (action) => {
     revealScore.value = true
   } else if(action ==="newGame"){
     revealScore.value = false
+    currentScore.value = 0
     userList.value.forEach(element => {
       element.score = 0
     });
