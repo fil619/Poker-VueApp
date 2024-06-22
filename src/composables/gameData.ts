@@ -7,8 +7,9 @@ const revealScore = ref(false);
 const fibonacci = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
 
 const userList = ref([]);
+const roomValue = ref(null);
 let currentPosition = ref(0);
-let currentScore = ref(0);
+let currentScore = ref(null);
 const positioning = ref<string[][]>([[], [], []]);
 
 export function useGameData() {
@@ -28,6 +29,7 @@ export function useGameData() {
       currentPosition.value++;
     }
   }
+  
   return {
     fibonacci,
     userList,
@@ -37,5 +39,6 @@ export function useGameData() {
     revealScore,
     positionUser,
     currentScore,
+    roomValue,
   };
 }

@@ -1,11 +1,26 @@
 <script setup>
 import { ref } from "vue";
 import { useGameData } from "../composables/gameData";
-const { gameName } = useGameData()
+const { gameName, roomValue } = useGameData()
 
 const name = ref("Test")
 
+function updateQueryParams(params) {
+  const url = new URL(window.location.href);
+  
+  Object.keys(params).forEach(key => {
+    if (params[key] !== null && params[key] !== undefined) {
+      url.searchParams.set(key, params[key]);
+    } else {
+      url.searchParams.delete(key); 
+    }
+  });
+
+  window.history.pushState({}, '', url);
+}
+
 function setName(){
+  updateQueryParams({ room: roomValue.value });
   gameName.value = name.value
 }
 </script>

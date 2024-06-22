@@ -8,7 +8,6 @@ const { gameName, userList, positionUser, positioning , revealScore, currentScor
 import { useSocket } from '../composables/useSocket';
 
 useSocket('joined', (users) => {
-  console.log(users);
   positioning.value = [[],[],[]]
   userList.value = []
   addUsers(users)
@@ -25,12 +24,17 @@ useSocket('userScore', (user) => {
   userScore.score = user.score
 });
 
+useSocket('setPersonalScore', (user) => {
+  let userScore = userList.value.find(el => el.id === user.user)
+  userScore.score = user.score
+});
+
 useSocket('userAction', (action) => {
   if (action ==="revealScore") {
     revealScore.value = true
   } else if(action ==="newGame"){
     revealScore.value = false
-    currentScore.value = 0
+    currentScore.value = null
     userList.value.forEach(element => {
       element.score = 0
     });
@@ -39,7 +43,6 @@ useSocket('userAction', (action) => {
 
 function addUsers(users){
   users.forEach((user) => {
-    console.log(user);
     userList.value.push(user)
     positionUser(user);
 });

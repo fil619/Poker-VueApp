@@ -2,13 +2,13 @@
 import { ref } from "vue";
 import { useGameData } from "../composables/gameData";
 import { useSocket } from '../composables/useSocket';
-const { gameName, userName } = useGameData();
+const { gameName, userName, roomValue } = useGameData();
 
 const { emitEvent } = useSocket();
 const name = ref("");
 
 function setName() {
-  emitEvent('joinRoom',  gameName.value, name.value);
+  emitEvent('joinRoom',  roomValue.value, name.value);
   userName.value = name.value;
 }
 </script>

@@ -3,14 +3,18 @@ import { computed } from "vue";
 import { useGameData } from "../composables/gameData";
 import { useSocket } from '../composables/useSocket';
 import FlipCard from "./FlipCard.vue";
-const { positioning, revealScore, gameName } = useGameData();
+const { positioning, revealScore, roomValue , userList, currentScore} = useGameData();
 const { emitEvent } = useSocket();
 
 function revealScoreFunction(){
   if (!revealScore.value) {
-    emitEvent('action', {room: gameName.value , action:'revealScore'});
+    emitEvent('action', {room: roomValue.value , action:'revealScore'});
   } else {
-    emitEvent('action', {room: gameName.value , action:'newGame'});
+    emitEvent('action', {room: roomValue.value , action:'newGame'});
+    currentScore.value = null
+    userList.value.forEach(element => {
+      element.score = 0
+    });
   }
   revealScore.value = !revealScore.value
 }

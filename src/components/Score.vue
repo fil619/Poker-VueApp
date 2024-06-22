@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { useGameData } from "../composables/gameData";
-const { fibonacci, gameName, currentScore } = useGameData();
+const { fibonacci, roomValue, currentScore } = useGameData();
 import { useSocket } from '../composables/useSocket';
 const { emitEvent } = useSocket();
 
 function setScore(score: number){
   currentScore.value = score
-  emitEvent('setScore', {room:  gameName.value, msg: score});
+  emitEvent('setScore', {room:  roomValue.value, msg: score});
 }
 </script>
 
