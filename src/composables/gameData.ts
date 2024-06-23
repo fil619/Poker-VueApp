@@ -6,11 +6,18 @@ const revealScore = ref(false);
 
 const fibonacci = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
 
-const userList = ref([]);
-const roomValue = ref(null);
+interface userType {
+  id: string
+  room: string
+  score: number
+  username: string
+}
+
+const userList = ref<userType[]>([]);
+const roomValue = ref<string | null>(null);
 let currentPosition = ref(0);
-let currentScore = ref(null);
-const positioning = ref<string[][]>([[], [], []]);
+let currentScore = ref<number | null>(null);
+const positioning = ref<userType[][]>([[], [], []]);
 
 export function useGameData() {
 

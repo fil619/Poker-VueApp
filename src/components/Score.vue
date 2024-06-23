@@ -2,7 +2,7 @@
 import { useGameData } from "../composables/gameData";
 const { fibonacci, roomValue, currentScore } = useGameData();
 import { useSocket } from '../composables/useSocket';
-const { emitEvent } = useSocket();
+const { emitEvent } = useSocket("",()=>{});
 
 function setScore(score: number){
   currentScore.value = score

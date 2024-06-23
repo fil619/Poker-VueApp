@@ -12,7 +12,7 @@ export function useSocket(event: string, callback: (data: any) => void) {
 
   onMounted(() => {
     socket = socketService.connect();
-    socket.on(event, callback);
+    socket?.on(event, callback);
   });
 
   onUnmounted(() => {

@@ -1,10 +1,10 @@
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
 import { useGameData } from "../composables/gameData";
 import { useSocket } from '../composables/useSocket';
 const { gameName, userName, roomValue } = useGameData();
 
-const { emitEvent } = useSocket();
+const { emitEvent } = useSocket("",()=>{});
 const name = ref("");
 
 function setName() {

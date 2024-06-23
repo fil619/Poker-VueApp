@@ -4,7 +4,7 @@ import { useGameData } from "../composables/gameData";
 import { useSocket } from '../composables/useSocket';
 import FlipCard from "./FlipCard.vue";
 const { positioning, revealScore, roomValue , userList, currentScore} = useGameData();
-const { emitEvent } = useSocket();
+const { emitEvent } = useSocket("",()=>{});
 
 function revealScoreFunction(){
   if (!revealScore.value) {

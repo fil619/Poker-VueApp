@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSocket } from "../composables/useSocket";
-const { emitEvent } = useSocket();
+const { emitEvent } = useSocket("",()=>{});
 import { useGameData } from "../composables/gameData";
 const { roomValue } = useGameData();
 
@@ -11,17 +11,17 @@ function emote(emotion : string) {
 
 <template>
   <div
-    class="bg-gray-200 absolute right-5 bottom-5 p-2 rounded-full flex hover-container"
+    class="bg-gray-200 absolute right-5 top-3 p-2 rounded-full flex hover-container"
   >
-    <button @click="emote('happy')" class="on-hover text-4xl">😊</button>
-    <button @click="emote('angry')" class="on-hover text-4xl">🤬</button>
-    <button @click="emote('thumbsup')" class="on-hover text-4xl">
+    <button @click="emote('happy')" class="on-hover text-2xl">😊</button>
+    <button @click="emote('angry')" class="on-hover text-2xl">🤬</button>
+    <button @click="emote('thumbsup')" class="on-hover text-2xl">
       👍
     </button>
-    <button @click="emote('thumbsdown')" class="on-hover text-4xl">
+    <button @click="emote('thumbsdown')" class="on-hover text-2xl">
       👎
     </button>
-    <button @click="emote('clap')" class="text-4xl">👏</button>
+    <button @click="emote('clap')" class="text-2xl">👏</button>
   </div>
 </template>
 

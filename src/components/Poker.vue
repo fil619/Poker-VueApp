@@ -1,6 +1,8 @@
 <script setup>
 import Game from "./Game.vue";
 import Score from "./Score.vue";
+import Chart from "./Chart.vue";
+import Emote from "./Emote.vue";
 
 import { useGameData } from "../composables/gameData";
 const {
@@ -15,6 +17,7 @@ const {
 import { useSocket } from "../composables/useSocket";
 
 useSocket("joined", (users) => {
+  console.log(users);
   positioning.value = [[], [], []];
   userList.value = [];
   addUsers(users);
@@ -72,39 +75,46 @@ function addUsers(users) {
 </script>
 
 <template>
-  <div class="flex flex-col h-screen">
+  <div class="flex flex-col h-screen poker-container">
     <div class="grow flex justify-center items-center">
+      <Emote />
       <Game />
+    </div>
+    <div class="flex justify-center items-center m-2" v-if="revealScore" >
+        <Chart />
     </div>
     <div class="flex justify-center items-center">
       <Score />
     </div>
     <div id="emoji-container">
-      <div class="emoji">👎</div>
     </div>
   </div>
 </template>
 
-<style >
+<style>
+.poker-container{
+  height: 100vh;
+  overflow: hidden;
+}
 .emoji {
   font-size: 50px; /* Adjust size as needed */
-  animation: float 3s ease-in-out 1;
+  animation: float 2s ease-in-out 1;
   opacity: 0;
   position: absolute;
-  bottom: 0;
+  bottom: 80px;
   right: 50%;
 }
 
 @keyframes float {
   0% {
     transform: translateY(100%);
-    opacity: 0;
+    opacity: 0.5;
   }
   20% {
     opacity: 1;
   }
   80% {
-    opacity: 1;
+    opacity: 0.80;
   }
   100% {
     transform: translateY(-100%);
