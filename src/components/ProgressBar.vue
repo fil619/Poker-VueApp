@@ -3,7 +3,6 @@ import { computed, ref, watch  } from 'vue';
 import { useGameData } from "../composables/gameData";
 const { userList } = useGameData()
 import Confetti from "./Confetti.vue";
-const confettiComponent = ref(null);
 
 const scoreArray = computed(() => {
     return userList.value.map(user => user.score);
@@ -18,6 +17,11 @@ function calculateAgreementPercentage(estimates:any) {
 
     return agreementPercentage;
 }
+
+interface ConfettiComponent {
+  shootConfetti: () => void;
+}
+const confettiComponent = ref<ConfettiComponent | null>(null);
 
 const agreement = computed(() => {
     const val =  calculateAgreementPercentage(scoreArray.value);
