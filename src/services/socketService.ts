@@ -1,6 +1,6 @@
 // src/services/socketService.ts
 import { io, Socket } from 'socket.io-client';
-const URL = "http://localhost:3000";
+const URL = "https://poker-socket.vercel.app";
 
 class SocketService {
   private socket: Socket | null = null;
